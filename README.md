@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Iniciando projeto 
+padrão de funções PascalCase
+Padrão de arquivos e variaveis camelCase
 
-## Getting Started
+Iniciando ambiente
+Instalando next configs basicas
 
-First, run the development server:
+instalando dependencias prisma storybook
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Configurando base 
+prisma init 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+cofiguração base conexão postgre .env schema  
 
-## Learn More
+criando lib/prisma cliente
 
-To learn more about Next.js, take a look at the following resources:
+✔ Evita múltiplas conexões
+✔ Funciona com App Router
+✔ Funciona com Hot Reload
+✔ Funciona com API Routes
+✔ Funciona em produção
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+codigo 
+import { PrismaClient } from '@prisma/client'
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+const prismaClientSingleton = () => {
+  return new PrismaClient()
+}
 
-## Deploy on Vercel
+declare global {
+  var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default prisma
+
+if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
+
+
+
+criado banco em postgree
+
+CREATE USER vivioteca WITH PASSWORD '';
+
+
+
+preparando merge em utils/cn.ts
+
+O tailwind-merge resolve conflitos de classes do Tailwind, e o clsx lida com condicionais.
+
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
