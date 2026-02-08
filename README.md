@@ -104,7 +104,7 @@ src/
 
 ## 🎯 Roadmap de Evolução
 
-- [ ] Implementação de **Auth.js (NextAuth)**
+- [x] Implementação de **Auth.js (NextAuth)**
 - [ ] Integração com **Google Books API**
 - [ ] Testes unitários com **Vitest**
 - [ ] Pipeline de **CI/CD com GitHub Actions**
