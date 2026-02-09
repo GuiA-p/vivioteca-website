@@ -2,8 +2,6 @@
 
 Uma base profissional **full-stack** para aplicações de descoberta e avaliação de livros, construída com foco em **performance**, **escalabilidade** e **design system modular**.
 
-![Stack](https://img.shields.io/badge/Stack-Next.js%2015%20%7B%2B%7D%20Prisma-black)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ---
 
@@ -34,8 +32,8 @@ npm run dev
 ```
 
 A aplicação estará disponível em:
-- **Aplicação:**   
-- **Storybook:**   
+- **Aplicação:**   : 'Ainda não disponível para visualização :/
+- **Storybook:**   : 'Ainda não disponível para visualização :/
 
 ---
 
@@ -60,8 +58,17 @@ Para manter escalabilidade e consistência em times maiores, o projeto utiliza:
 - **Import Sorting:** Organização automática de imports
 - **Tailwind Linter:** Ordem oficial de classes e prevenção de duplicatas
 - **Atomic Design Adaptado:**
-  - `/ui` → componentes puramente visuais
-  - `/shared` → componentes com regra de negócio
+  - `/atomos` → componentes simples e puramente visuais, sem regra de negócio.
+  Ex: Button, Input, Badge.
+
+  - `/moleculas` → combinação de átomos com lógica leve e reutilizável.
+  Ex: campos de formulário, buscas, pequenos agrupamentos.
+
+  - `/organismos` → componentes mais complexos que concentram regras de negócio e comportamento.
+  Ex: listas, headers, seções completas da interface.
+
+  - `/layout` → componentes responsáveis pela estrutura e composição das páginas.
+  Ex: sidebar, wrappers e containers de layout.
 
 ---
 
@@ -78,16 +85,7 @@ O **Storybook** é utilizado como *Single Source of Truth* para UI.
 ## 📂 Estrutura de Pastas
 
 ```txt
-src/
-├── app/              # Routes, Layouts e Server Actions
-├── components/
-│   ├── ui/           # Átomos do Design System (Button, Input)
-│   ├── shared/       # Organismos (Navbar, Sidebar)
-│   └── forms/        # Lógica de formulários (Zod + React Hook Form)
-├── hooks/            # Hooks customizados e reutilizáveis
-├── lib/              # Singletons e configurações globais (Prisma, Auth)
-├── services/         # Camada de Acesso a Dados (DAL)
-└── utils/            # Funções puras e utilitários
+
 ```
 
 ---
