@@ -34,8 +34,8 @@ npm run dev
 ```
 
 A aplicação estará disponível em:
-- **Aplicação:** http://localhost:3000  
-- **Storybook:** http://localhost:6006  
+- **Aplicação:**   
+- **Storybook:**   
 
 ---
 
@@ -104,7 +104,7 @@ src/
 
 ## 🎯 Roadmap de Evolução
 
-- [x] Implementação de **Auth.js (NextAuth)**
+- [ ] Implementação de **Auth.js (NextAuth)**
 - [ ] Integração com **Google Books API**
 - [ ] Testes unitários com **Vitest**
 - [ ] Pipeline de **CI/CD com GitHub Actions**
