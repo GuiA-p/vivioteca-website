@@ -1,74 +1,75 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import ts from 'typescript-eslint';
+import nextPlugin from '@next/eslint-plugin-next';
+import reactPlugin from 'eslint-plugin-react';
+import hooksPlugin from 'eslint-plugin-react-hooks';
 import storybook from 'eslint-plugin-storybook';
-import tailwind from 'eslint-plugin-tailwindcss';
+
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettier from 'eslint-plugin-prettier';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  // 1. Configurações base do Next.js e TypeScript
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  
-  // 2. Configurações do Storybook
-  ...storybook.configs['flat/recommended'],
-
-  // 3. Regras customizadas para o projeto
+export default ts.config(
+  // 1. Ignorar arquivos globalmente (Deve ser o primeiro objeto)
   {
+    ignores: ['.next/**', 'node_modules/**', 'storybook-static/**', 'dist/**'],
+  },
+
+  // 2. Base recomendada
+  js.configs.recommended,
+  ...ts.configs.recommended,
+
+  // 3. Bloco Único de Configuração (Resolve o erro de plugin não definido)
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
-      tailwindcss: tailwind,
+      '@next/next': nextPlugin,
+      'react': reactPlugin,
+      'react-hooks': hooksPlugin,
+  
       'simple-import-sort': simpleImportSort,
-      prettier: prettier,
+      'prettier': prettier,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    settings: {
+      react: { version: 'detect' },
+     
     },
     rules: {
-      // Qualidade de código
+      // Regras do Next e React
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+      ...hooksPlugin.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+
+      // TypeScript
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
 
-      // Ordenação de imports automática
+      // Imports
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
 
-      // Tailwind CSS
-      'tailwindcss/classnames-order': 'warn',
-      'tailwindcss/no-custom-classname': 'off', // Permitir classes do CVA
-      'tailwindcss/enforces-shorthand': 'error',
+    
 
-      // Prettier integrado
+      // Prettier (Sempre por último para sobrescrever conflitos)
       'prettier/prettier': [
         'error',
         {
-          trailingComma: 'all',
           singleQuote: true,
+          trailingComma: 'all',
           printWidth: 80,
           semi: true,
+          jsxSingleQuote: false,
         },
       ],
     },
   },
 
-  // 4. Configuração específica para o Tailwind saber onde olhar
-  {
-    settings: {
-      tailwindcss: {
-        callees: ['cn', 'cva'],
-        config: 'tailwind.config.ts',
-      },
-    },
-  },
-
-  // 5. Arquivos ignorados
-  {
-    ignores: ['.next/**', 'node_modules/**', 'dist/**', 'build/**'],
-  },
-];
-
-export default eslintConfig;
+  // 4. Storybook (Configuração especializada via plugin oficial)
+  ...storybook.configs['flat/recommended'],
+);

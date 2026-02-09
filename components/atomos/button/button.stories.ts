@@ -1,14 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Button } from './button';
 
-
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: 'Atomos/Button',
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'radio', options: ['primary', 'secundary', 'ghost', 'disable'] },
-    size: { control: 'radio', options: ['sm','md' ,'lg'] },
+    variant: {
+      control: 'radio',
+      options: ['primary', 'secundary', 'ghost', 'disable'],
+    },
+    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
   },
 };
 
@@ -17,7 +20,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    children: "Click me",
+    children: 'Click me',
     variant: 'primary',
   },
 };
@@ -29,7 +32,6 @@ export const Secundary: Story = {
   },
 };
 
-
 export const Ghost: Story = {
   args: {
     children: 'Ghost Button',
@@ -37,11 +39,9 @@ export const Ghost: Story = {
   },
 };
 
-
 export const Disabled: Story = {
   args: {
     children: 'Disabled Button',
     variant: 'disable',
   },
 };
-

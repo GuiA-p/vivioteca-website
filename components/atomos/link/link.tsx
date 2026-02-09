@@ -1,7 +1,8 @@
-import * as React from 'react'
-import NextLink from 'next/link'
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/utils/cn'
+import { cva, type VariantProps } from 'class-variance-authority';
+import NextLink from 'next/link';
+import * as React from 'react';
+
+import { cn } from '@/utils/cn';
 
 const linkVariants = cva('font-bold text-gray-700 hover:text-blue-400', {
   variants: {
@@ -13,12 +14,13 @@ const linkVariants = cva('font-bold text-gray-700 hover:text-blue-400', {
   defaultVariants: {
     variant: 'default',
   },
-})
+});
 
 export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  extends
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof linkVariants> {
-  href: string
+  href: string;
 }
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
@@ -32,10 +34,10 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       >
         {children}
       </NextLink>
-    )
-  }
-)
+    );
+  },
+);
 
-Link.displayName = 'Link'
+Link.displayName = 'Link';
 
-export { Link }
+export { Link };

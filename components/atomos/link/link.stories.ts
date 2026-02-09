@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+
 import { Link } from './link';
 
 const meta: Meta<typeof Link> = {
@@ -25,7 +26,7 @@ export const Internal: Story = {
     href: '/',
     variant: 'default',
   },
-}
+};
 
 export const External: Story = {
   args: {
@@ -35,5 +36,4 @@ export const External: Story = {
     target: '_blank',
     rel: 'noopener noreferrer',
   },
-}
-
+};

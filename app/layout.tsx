@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import '@/styles/globals.css'
+import '@/styles/globals.css';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Iniciando Teste",
-  description: "Pagina ambiente 1",
+  title: 'Iniciando Teste',
+  description: 'Pagina ambiente 1',
 };
 
 export default function RootLayout({
@@ -13,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
