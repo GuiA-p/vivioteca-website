@@ -4,32 +4,40 @@ import * as React from 'react';
 
 import { cn } from '@/utils/cn';
 
-const linkVariants = cva('font-bold text-gray-700 hover:text-blue-400', {
+const linkVariants = cva('font-bold hover:text-blue-400', {
   variants: {
     variant: {
-      default: '',
-      outline: 'text-blue-600 underline',
+      internal: 'text-blue-600',
+      navbar: '',
+      footer: 'text-sm',
+      aside: 'text-gray-700',
+      external: 'text-blue-600 underline',
     },
+    theme: {
+      default: 'text-gray-700 ',
+      dark: 'text-gray-50',
+    }
   },
   defaultVariants: {
-    variant: 'default',
+    variant: 'internal',
+    theme:"default",
   },
 });
 
-export interface LinkProps
+interface LinkProps
   extends
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof linkVariants> {
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  VariantProps<typeof linkVariants> {
   href: string;
 }
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant, href, children, ...props }, ref) => {
+  ({ className, variant, theme, href, children, ...props }, ref) => {
     return (
       <NextLink
         href={href}
         ref={ref}
-        className={cn(linkVariants({ variant }), className)}
+        className={cn(linkVariants({ variant, theme }), className)}
         {...props}
       >
         {children}
@@ -40,4 +48,4 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
 
 Link.displayName = 'Link';
 
-export { Link };
+export { Link, linkVariants };
