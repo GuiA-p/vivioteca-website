@@ -8,16 +8,25 @@ const meta: Meta<typeof Link> = {
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      control: { type: 'radio' },
-      options: ['default', 'externo'],
+      control: { type: 'select' },
+      options: ['internal', 'external', 'navbar', 'footer', 'aside'],
     },
     theme: {
-      control: { type: 'radio' },
+      control: { type: 'select' },
       options: ['default', 'dark'],
+    },
+    underline: {
+      control: 'boolean',
+    },
+    externalIcon: {
+      control: 'boolean',
     },
     href: {
       control: 'text',
     },
+  },
+  parameters: {
+    layout: 'centered',
   },
 };
 
@@ -31,35 +40,28 @@ export const Internal: Story = {
     variant: 'internal',
   },
 };
-
 export const External: Story = {
   args: {
-    variant: 'external',
+    children: 'Link Externo com Ícone',
     href: 'https://google.com',
-    children: 'Link externo ↗',
-    target: '_blank',
-    rel: 'noopener noreferrer',
+    variant: 'external',
+    externalIcon: true,
   },
 };
 
-
-
-export const Navbar: Story = {
+export const NavbarLink: Story = {
   args: {
-    children: 'Link Navbar',
-    href: '/',
+    children: 'Menu',
+    href: '/menu',
     variant: 'navbar',
-    theme: 'default'
   },
 };
 
-export const Footer: Story = {
+export const FooterLink: Story = {
   args: {
-    children: 'Link Footer',
-    href: '/',
+    children: 'Privacidade',
+    href: '/privacy',
     variant: 'footer',
-    theme: 'default'
+    theme: 'dark',
   },
 };
-
-

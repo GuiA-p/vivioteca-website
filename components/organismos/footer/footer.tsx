@@ -1,62 +1,97 @@
-import * as React from 'react'
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/utils/cn'
-import { Logo } from '@/components/atomos/logo/logo'
-import { NavLinks } from '@/components/moleculas/navLinks/navLinks'
+import { cva, type VariantProps } from 'class-variance-authority';
+import { forwardRef } from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
+import { Logo } from '@/components/atomos/logo/logo';
+import { NavLinks } from '@/components/moleculas/navLinks/navLinks';
+import { SocialLinks } from '@/components/moleculas/socialLinks/socialLinks';
+import { cn } from '@/utils/cn';
 
-const footerVariants = cva('grid items-center justify-center', {
-    variants: {
-        variant: {
-            default: 'bg-white text-black',
-            dark: 'bg-black text-white',
-        },
-        size: {
-            desktop: 'px-8 grid-cols-3',
-            tablet: 'px-6 grid-cols-2',
-            mobile: 'px-4 grid-cols-1',
-        },
+const footerVariants = cva('w-full border-t', {
+  variants: {
+    variant: {
+      default: 'bg-white border-gray-200 text-gray-900',
+      dark: 'bg-gray-900 border-gray-800 text-white',
     },
-    defaultVariants: {
-        variant: 'default',
-        size: 'desktop',
+    size: {
+      desktop: 'py-8 md:py-12 px-4 md:px-8 lg:px-16',
+      tablet: 'py-6 px-4 md:px-6',
+      mobile: 'py-4 px-4',
     },
-})
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'desktop',
+  },
+});
 
 export interface FooterProps
-    extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof footerVariants> { }
+  extends
+    React.HTMLAttributes<HTMLElement>,
+    VariantProps<typeof footerVariants> {
+  copyright?: string;
+}
 
-const Footer = React.forwardRef<HTMLElement, FooterProps>(
-    ({ className, variant, size, ...props }, ref) => {
-        return (
-            <footer>
-                <div 
-                    className={cn(footerVariants({ variant, size }), className)} 
-                    {...props}>
-                    <div className='flex flex-col'>
-                        <Logo />
-                        <span>Redes</span>
-                    </div>
-                    <div>
-                        <h1>Links</h1>
-                       
-                       <NavLinks variant='vertical'/>
-                    </div>
-                    <div>
-                        <h1>Contato</h1>
-                        <p>Email</p>
-                        <p>Telefone</p>
-
-                    </div>
+const Footer = forwardRef<HTMLElement, FooterProps>(
+  (
+    {
+      className,
+      variant,
+      size,
+      copyright = `© ${new Date().getFullYear()} Guilherme Abatemarco. Todos os direitos reservados.`,
+      ...props
+    },
+    ref,
+  ) => {
+    return (
+      <footer
+        ref={ref}
+        className={cn(footerVariants({ variant, size }), className)}
+        {...props}
+      >
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="flex flex-col space-y-4">
+              <Logo variant={variant} />
+              <div>
+                <div className="flex space-x-4">
+                  <SocialLinks />
                 </div>
-                <span className='w-full flex items-center justify-center'>@copy Guilherme Abatemarco</span>
+              </div>
+            </div>
 
-            </footer>
-        )
-    }
-)
+            <div>
+              <h3 className="mb-4 text-lg font-semibold">Links Rápidos</h3>
+              <NavLinks
+                variant="vertical"
+                links={[
+                  { href: '/', label: 'Home', variant: 'footer' },
+                  { href: '/contact', label: 'Contato', variant: 'footer' },
+                  { href: '/about', label: 'Sobre', variant: 'footer' },
+                  { href: '/privacy', label: 'Privacidade', variant: 'footer' },
+                  { href: '/terms', label: 'Termos', variant: 'footer' },
+                ]}
+              />
+            </div>
 
-Footer.displayName = 'Footer'
+            <div>
+              <h3 className="mb-4 text-lg font-semibold">Contato</h3>
+              <div className="space-y-2">
+                <p className="flex items-center">exemplo@exemplo.com</p>
+                <p className="flex items-center">(11) 99999-9999</p>
+              </div>
+            </div>
+          </div>
 
-export { Footer, footerVariants }
+          <div className="mt-8 border-t pt-6 text-center text-sm text-gray-500">
+            {copyright}
+          </div>
+        </div>
+      </footer>
+    );
+  },
+);
+
+Footer.displayName = 'Footer';
+
+export { Footer, footerVariants };

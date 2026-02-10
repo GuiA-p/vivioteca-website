@@ -1,55 +1,66 @@
-import { Link } from "@/components/atomos/link/link"
 import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
+import { forwardRef } from 'react';
+
+import { Link } from '@/components/atomos/link/link';
 import { cn } from '@/utils/cn';
 
-const navLinksVariants = cva('flex ', {
-    variants: {
-        variant: {
-            horizontal: 'flex-row gap-4',
-            vertical: 'flex-col gap-2',
-        },
+const navLinksVariants = cva('flex', {
+  variants: {
+    variant: {
+      horizontal: 'flex-row gap-4 md:gap-6',
+      vertical: 'flex-col gap-2 md:gap-3',
     },
-    defaultVariants: {
+    align: {
+      left: 'justify-start',
+      center: 'justify-center',
+      right: 'justify-end',
+    },
+  },
+  defaultVariants: {
     variant: 'horizontal',
-},
+    align: 'left',
+  },
 });
 
-interface NavLinksProps
-  extends 
-  React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof navLinksVariants> {
-  href: string;
+export interface NavLinksProps
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof navLinksVariants> {
+  links?: Array<{
+    href: string;
+    label: string;
+    variant?: 'internal' | 'external' | 'navbar' | 'footer' | 'aside';
+  }>;
 }
 
-const navLinkslist = [
-        {
-            href: '/',
-            label: 'Home',
-        },
-        {
-            href: 'contact',
-            label: 'Contato',
-        },
-        {
-            href: 'about',
-            label: 'Sobre',
-        },
-    ]
+const defaultLinks = [
+  { href: '/', label: 'Home', variant: 'navbar' as const },
+  { href: '/contact', label: 'Contato', variant: 'navbar' as const },
+  { href: '/about', label: 'Sobre', variant: 'navbar' as const },
+];
 
-
-const NavLinks = React.forwardRef<HTMLDivElement, NavLinksProps>(
-    ({ className, variant, ...props }, ref) => {
-        return(
-            <div className={cn(navLinksVariants({ variant }), className)} ref={ref} {...props}>
-                {navLinkslist.map(e => {
-                    return (
-                        <Link variant='footer' theme='dark' href={e.href}>{e.label}</Link>
-                    )
-                })}
-            </div>
-        )
-    },
+const NavLinks = forwardRef<HTMLDivElement, NavLinksProps>(
+  ({ className, variant, align, links = defaultLinks, ...props }, ref) => {
+    return (
+      <nav
+        ref={ref}
+        className={cn(navLinksVariants({ variant, align }), className)}
+        aria-label="Navegação principal"
+        {...props}
+      >
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            variant={link.variant}
+            className="whitespace-nowrap"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+    );
+  },
 );
 
 NavLinks.displayName = 'NavLinks';
