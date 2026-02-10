@@ -1,9 +1,9 @@
 import { Typography } from '@/components/atomos/typography/typography';
 
-export const Contact = () => {
+export default function ContactPage() {
   return (
     <main className="container mx-auto min-h-screen">
       <Typography variant="h1">Contato</Typography>
     </main>
   );
-};
+}

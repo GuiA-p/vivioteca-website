@@ -1,6 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 import { Logo } from '@/components/atomos/logo/logo';
 import { NavLinks } from '@/components/moleculas/navLinks/navLinks';

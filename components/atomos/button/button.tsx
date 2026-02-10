@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { cn } from '@/utils/cn';
 
-// exemplo cva: 'base focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
 const buttonVariants = cva(
   'px-4 py-2 w-min text-nowrap font-bold rounded-lg hover:shadow-2xl',
   {
@@ -27,7 +26,6 @@ const buttonVariants = cva(
   },
 );
 
-// Type
 export interface ButtonProps
   extends
     React.ButtonHTMLAttributes<HTMLButtonElement>,

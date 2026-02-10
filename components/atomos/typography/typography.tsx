@@ -29,7 +29,7 @@ interface TypographyProps
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, as, ...props }, ref) => {
-    const Component = as || (variant as any) || 'p';
+    const Component = as || variant || 'p';
 
     return (
       <Component

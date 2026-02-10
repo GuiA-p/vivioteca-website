@@ -37,6 +37,7 @@ const defaultLinks = [
   { href: '/', label: 'Home', variant: 'navbar' as const },
   { href: '/contact', label: 'Contato', variant: 'navbar' as const },
   { href: '/about', label: 'Sobre', variant: 'navbar' as const },
+  { href: '/login', label: 'Login', variant: 'navbar' as const },
 ];
 
 const NavLinks = forwardRef<HTMLDivElement, NavLinksProps>(
