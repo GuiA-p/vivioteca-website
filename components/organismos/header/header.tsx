@@ -31,7 +31,7 @@ const headerVariants = cva(
   },
 );
 
-export interface HeaderProps
+interface HeaderProps
   extends
     React.HTMLAttributes<HTMLElement>,
     VariantProps<typeof headerVariants> {
@@ -48,7 +48,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       >
         <div className="container mx-auto flex h-full items-center justify-between">
           <div className="flex items-center">
-            <Logo href={logoHref} variant={variant} />
+            <Logo href={logoHref} variant={variant} size={'sm'} />
           </div>
 
           <nav className="hidden md:block">

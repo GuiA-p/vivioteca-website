@@ -14,9 +14,9 @@ const footerVariants = cva('w-full border-t', {
       dark: 'bg-gray-900 border-gray-800 text-white',
     },
     size: {
-      desktop: 'py-8 md:py-12 px-4 md:px-8 lg:px-16',
-      tablet: 'py-6 px-4 md:px-6',
-      mobile: 'py-4 px-4',
+      desktop: 'pt-8 md:pt-12 px-4 md:px-8 lg:px-16',
+      tablet: 'pt-6 px-4 md:px-6',
+      mobile: 'pt-4 px-4',
     },
   },
   defaultVariants: {
@@ -52,7 +52,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="flex flex-col space-y-4">
-              <Logo variant={variant} />
+              <Logo variant={variant} size={'sm'} />
               <div>
                 <div className="flex space-x-4">
                   <SocialLinks />
@@ -83,7 +83,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
             </div>
           </div>
 
-          <div className="mt-8 border-t pt-6 text-center text-sm text-gray-500">
+          <div className="pt-6 text-center text-sm text-gray-500">
             {copyright}
           </div>
         </div>

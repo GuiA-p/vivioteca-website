@@ -5,6 +5,9 @@ import { Link } from './link';
 const meta: Meta<typeof Link> = {
   title: 'Atomos/Link',
   component: Link,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   argTypes: {
     variant: {
@@ -24,9 +27,6 @@ const meta: Meta<typeof Link> = {
     href: {
       control: 'text',
     },
-  },
-  parameters: {
-    layout: 'centered',
   },
 };
 

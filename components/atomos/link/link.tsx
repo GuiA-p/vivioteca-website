@@ -6,15 +6,15 @@ import { FiExternalLink } from 'react-icons/fi';
 import { cn } from '@/utils/cn';
 
 const linkVariants = cva(
-  'font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500',
+  'font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500',
   {
     variants: {
       variant: {
-        internal: 'text-blue-600 hover:text-blue-800',
-        navbar: 'hover:text-blue-400',
-        footer: 'text-sm hover:text-blue-400',
+        internal: 'text-orange-600 hover:text-orange-800',
+        navbar: 'hover:text-orange-400',
+        footer: 'text-sm hover:text-orange-400',
         aside: 'text-gray-700 hover:text-gray-900',
-        external: 'text-blue-600 underline hover:text-blue-800',
+        external: 'text-orange-600 underline hover:text-orange-800',
       },
       theme: {
         default: 'text-gray-700',

@@ -6,6 +6,9 @@ const meta: Meta<typeof Input> = {
   title: 'Atomos/Input',
   component: Input,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: {
       control: { type: 'radio' },

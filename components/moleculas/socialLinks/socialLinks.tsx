@@ -28,9 +28,9 @@ export function SocialLinks() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={name}
-          className="rounded-md p-2 text-orange-400 transition hover:bg-zinc-100 hover:text-orange-600 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+          className="rounded-md p-2 text-gray-700 transition hover:text-orange-600 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
         >
-          <Icon className="text-xl" />
+          <Icon size={25} />
         </a>
       ))}
     </div>

@@ -6,6 +6,9 @@ const meta: Meta<typeof Label> = {
   title: 'Atomos/Label',
   component: Label,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: {
       control: { type: 'select' },

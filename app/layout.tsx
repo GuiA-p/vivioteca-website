@@ -6,8 +6,12 @@ import { Footer } from '@/components/organismos/footer/footer';
 import { Header } from '@/components/organismos/header/header';
 
 export const metadata: Metadata = {
-  title: 'Iniciando Teste',
-  description: 'Pagina ambiente 1',
+  title: 'GM Digital',
+  description:
+    'Desenvolvimento e Marketing Digital para alavancar empresar e negocios de forma rápida.',
+  icons: {
+    icon: '/logo/logoIcon.svg',
+  },
 };
 
 export default function RootLayout({
