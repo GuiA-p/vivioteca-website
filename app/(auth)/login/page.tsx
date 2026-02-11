@@ -1,11 +1,10 @@
-import { Typography } from '@/components/atomos/typography/typography';
+import { PageLayout } from '@/components/layouts/pageLayout';
 import { LoginForm } from '@/components/organismos/forms/login-form';
 
 export default function LoginPage() {
   return (
-    <main className="container mx-auto min-h-screen">
-      <Typography variant="h1">Login</Typography>
+    <PageLayout>
       <LoginForm />
-    </main>
+    </PageLayout>
   );
 }

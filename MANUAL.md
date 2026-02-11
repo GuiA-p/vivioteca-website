@@ -11,7 +11,7 @@ Adotamos uma versão simplificada do Atomic Design para organização dos compon
 - `src/components/atomos`: Componentes básicos e indivisíveis (Ex: Button, Input, Badge).
 - `src/components/moleculas`: Combinação de átomos (Ex: FormField, SearchBar).
 - `src/components/organismos`: Seções complexas e independentes (Ex: Header, Footer, Sidebar).
-- `src/components/templates`: Layouts estruturais para páginas.
+- `src/components/layouts`: Layouts estruturais para páginas.
 
 ---
 
@@ -46,6 +46,8 @@ interface ButtonProps
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils/cn'
+
+// TypeScript ...
 
 const buttonVariants = cva('base-classes...', {
   variants: {

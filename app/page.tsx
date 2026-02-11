@@ -1,9 +1,14 @@
+import { PageLayout } from '@/components/layouts/pageLayout';
 import Hero from '@/components/organismos/hero/hero';
+import Trending from '@/components/organismos/trending/trending';
+import VibeSearch from '@/components/organismos/vibeSearch/vibeSearch';
 
 export default function Home() {
   return (
-    <main className="container mx-auto min-h-screen">
+    <PageLayout>
       <Hero />
-    </main>
+      <Trending />
+      <VibeSearch />
+    </PageLayout>
   );
 }

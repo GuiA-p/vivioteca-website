@@ -1,24 +1,26 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import NextLink from 'next/link';
-import { forwardRef } from 'react';
+import * as React from 'react';
 import { FiExternalLink } from 'react-icons/fi';
 
 import { cn } from '@/utils/cn';
 
 const linkVariants = cva(
-  'font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500',
+  'font-bold transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background w-fit',
   {
     variants: {
       variant: {
-        internal: 'text-orange-600 hover:text-orange-800',
-        navbar: 'hover:text-orange-400',
-        footer: 'text-sm hover:text-orange-400',
-        aside: 'text-gray-700 hover:text-gray-900',
-        external: 'text-orange-600 underline hover:text-orange-800',
-      },
-      theme: {
-        default: 'text-gray-700',
-        dark: 'text-gray-50 hover:text-gray-200',
+        internal: 'text-primary hover:opacity-80',
+
+        navbar: 'text-foreground/80 hover:text-primary',
+
+        footer: 'text-sm text-muted-foreground hover:text-primary',
+
+        aside:
+          'text-muted-foreground hover:text-foreground hover:bg-muted/30 px-2 py-1 -ml-2 rounded-md',
+
+        external:
+          'text-primary underline decoration-primary/30 hover:decoration-primary',
       },
       underline: {
         true: 'underline',
@@ -33,7 +35,6 @@ const linkVariants = cva(
     ],
     defaultVariants: {
       variant: 'internal',
-      theme: 'default',
       underline: false,
     },
   },
@@ -47,12 +48,11 @@ export interface LinkProps
   externalIcon?: boolean;
 }
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
     {
       className,
       variant,
-      theme,
       underline,
       href,
       children,
@@ -61,21 +61,37 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref,
   ) => {
-    const isExternal = href.startsWith('http') || variant === 'external';
-    const LinkComponent = isExternal ? 'a' : NextLink;
+    const isExternal =
+      href.startsWith('http') ||
+      href.startsWith('//') ||
+      props.target === '_blank';
+
+    const commonProps = {
+      ref,
+      className: cn(linkVariants({ variant, underline }), className),
+      ...props,
+    };
+
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          {...commonProps}
+        >
+          {children}
+          {externalIcon && (
+            <FiExternalLink className="text-[0.8em] opacity-70" />
+          )}
+        </a>
+      );
+    }
 
     return (
-      <LinkComponent
-        href={href}
-        ref={ref}
-        className={cn(linkVariants({ variant, theme, underline }), className)}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        {...props}
-      >
+      <NextLink href={href} {...commonProps}>
         {children}
-        {isExternal && externalIcon && <FiExternalLink className="text-sm" />}
-      </LinkComponent>
+      </NextLink>
     );
   },
 );

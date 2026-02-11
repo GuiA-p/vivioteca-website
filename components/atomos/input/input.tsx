@@ -3,10 +3,8 @@ import * as React from 'react';
 
 import { cn } from '@/utils/cn';
 
-// trazer todos os elementos de um botão porque já existe uma semantica para ele usando o interface utilizando cva variantes passado com propriedade
-
 const inputVariants = cva(
-  'flex flex-row border-2 border-gray-600 rounded-md p-1 shadow-inner shadow-black/90 px-2',
+  'flex flex-row border-2 border- rounded-md p-1 shadow-inner shadow-black/90 px-2',
   {
     variants: {
       variant: {

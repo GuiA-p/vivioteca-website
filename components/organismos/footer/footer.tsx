@@ -51,7 +51,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="flex flex-col space-y-4">
-              <Logo variant={variant} size={'sm'} />
+              <Logo variant={variant} size={'lg'} />
               <div>
                 <div className="flex space-x-4">
                   <SocialLinks />

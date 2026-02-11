@@ -1,8 +1,63 @@
 @import "tailwindcss";
 
-@variant dark (&:is(.dark *));
-
 @theme {
-  --color-surface: light-dark(#ffffff, #09090b);
-  --color-on-surface: light-dark(#000000, #ffffff);
+  /* Fundo principal: Papel Off-white (#F2F2F2) */
+  --color-background: #F2F2F2;
+
+  /* Texto principal: Marrom profundo (#401D10) para contraste máximo */
+  --color-foreground: #401D10;
+
+  /* Cor de Marca: Terracota (#BF815E) para ações primárias (CTAs) */
+  --color-primary: #BF815E;
+
+  /* Texto sobre Primary: Garante leitura clara em botões terracota */
+  --color-primary-foreground: #F2F2F2;
+
+  /* UI Neutra: Tom sépia para fundos secundários e elementos discretos */
+  --color-muted: #D9C6B0;
+
+  /* Texto secundário: Marrom médio para menor hierarquia visual */
+  --color-muted-foreground: #735134;
+
+  /* Estrutura: Bordas, divisores e anéis de foco */
+  --color-border: #D9C6B0;
+  --color-ring: #BF815E;
+}
+
+.dark {
+
+  --color-background: #401D10;
+  --color-foreground: #F2F2F2;
+
+  --color-muted: #735134;
+  --color-muted-foreground: #D9C6B0;
+
+
+  --color-border: #735134;
+  --color-ring: #D9C6B0;
+
+  /* Fontes */
+  --font-family-serif: var(--font-domine), serif;
+  --font-family-sans: var(--font-comfortaa), cursive;
+
+}
+
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border, currentColor);
+  }
+
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased;
+    transition-property: background-color, color, border-color;
+    transition-duration: 200ms;
+  }
 }

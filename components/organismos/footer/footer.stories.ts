@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Header } from './header';
+import { Footer } from './footer';
 
-const meta: Meta<typeof Header> = {
-  title: 'Organismos/Header',
-  component: Header,
+const meta: Meta<typeof Footer> = {
+  title: 'Organismos/Footer',
+  component: Footer,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
   },
-  // Isso permite testar os tamanhos direto no Storybook
   argTypes: {
     size: {
       control: 'select',
@@ -19,7 +18,7 @@ const meta: Meta<typeof Header> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
   args: {

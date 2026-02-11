@@ -1,9 +1,11 @@
-import { Typography } from '@/components/atomos/typography/typography';
+import { PageLayout } from '@/components/layouts/pageLayout';
 
 export default function ContactPage() {
   return (
-    <main className="container mx-auto min-h-screen">
-      <Typography variant="h1">Contato</Typography>
-    </main>
+    <>
+      <PageLayout>
+        <h1>Ola</h1>
+      </PageLayout>
+    </>
   );
 }
