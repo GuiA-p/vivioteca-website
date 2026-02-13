@@ -1,7 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority';
-import * as React from 'react';
-
-import { cn } from '@/utils/cn';
+import { cva, type VariantProps } from 'class-variance-authority'
+import * as React from 'react'
+import { cn } from '@/utils/cn'
 
 const textVariants = cva('font-serif transition-colors', {
   variants: {
@@ -28,27 +27,27 @@ const textVariants = cva('font-serif transition-colors', {
     weight: 'normal',
     variant: 'default',
   },
-});
+})
 
-interface TextProps
-  extends
-    React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof textVariants> {
-  as?: 'p' | 'span' | 'label' | 'div';
+type TextOwnProps = VariantProps<typeof textVariants> & {
+  as?: React.ElementType
 }
 
-const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
-  ({ className, size, weight, variant, as: Tag = 'p', ...props }, ref) => {
+type TextProps = TextOwnProps &
+  Omit<React.ComponentPropsWithoutRef<any>, keyof TextOwnProps>
+
+const Text = React.forwardRef<HTMLElement, TextProps>(
+  ({ className, size, weight, variant, as: Component = 'p', ...props }, ref) => {
     return (
-      <Tag
+      <Component
         ref={ref}
         className={cn(textVariants({ size, weight, variant }), className)}
         {...props}
       />
-    );
-  },
-);
+    )
+  }
+)
 
-Text.displayName = 'Text';
+Text.displayName = 'Text'
 
-export { Text };
+export { Text }

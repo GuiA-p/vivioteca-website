@@ -3,26 +3,27 @@ import { Heading } from '@/components/atomos/typography/heading/heading';
 import { Text } from '@/components/atomos/typography/text/text';
 import { SectionLayout } from '@/components/layouts/sectionLayout/sectionLayout';
 import { BookCard } from '@/components/moleculas/bookCard/bookCard';
-import capaExemplo from '@/public/logo/capaLivroEx.png';
+import CapaLivro from '@/public/capaLivroEx.png'
 
-const livros = [
+const LIVROS = [
   {
-    cover: capaExemplo,
+
+    cover: CapaLivro, 
     title: 'Nome Livro',
     description: 'Descrição curta do livro exemplo.',
-    href: '@/public/logo/capaLivroEx.png',
+    href: '#',
   },
   {
-    cover: capaExemplo,
+    cover: CapaLivro,
     title: 'Nome Livro',
     description: 'Descrição curta do livro exemplo.',
-    href: '/',
+    href: '#',
   },
   {
-    cover: capaExemplo,
+    cover: CapaLivro,
     title: 'Nome Livro',
     description: 'Descrição curta do livro exemplo.',
-    href: '/',
+    href: '#',
   },
 ];
 
@@ -34,9 +35,10 @@ export default function Trending() {
       </Heading>
 
       <div className="flex flex-row gap-4 items-center justify-center">
-        {livros.map((livro, index) => (
+        {LIVROS.map((livro, index) => (
           <BookCard key={index}>
             <BookCard.Image src={livro.cover} alt={livro.title} />
+            
             <BookCard.Header>
               <Heading level="h5">{livro.title}</Heading>
             </BookCard.Header>
