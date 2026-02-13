@@ -2,9 +2,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 
 import { Logo } from '@/components/atomos/logo/logo';
-import { ThemeToggle } from '@/components/atomos/theme/theme-toggle';
-import { InputSeach } from '@/components/moleculas/inputSearch/inputSeach';
-import { NavLinks } from '@/components/moleculas/navLinks/navLinks';
+import { InputSearch } from '@/components/moleculas/seachBox/SeachBox';
 import { cn } from '@/utils/cn';
 
 const headerVariants = cva(
@@ -48,16 +46,15 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         className={cn(headerVariants({ variant, size, fixed }), className)}
         {...props}
       >
-        <div className="container mx-auto grid grid-cols-2 md:grid-cols-3 h-full items-center justify-between">
+        <div className="container mx-auto grid grid-cols-2 lg:grid-cols-3 h-full items-center justify-between">
           <div className="flex items-center">
             <Logo href={logoHref} variant={variant} size={'lg'} />
           </div>
 
-          <NavLinks variant="horizontal" align="center" />
+          <div></div>
 
-          <div className="flex flex-row gap-2 items-center justify-end">
-            <ThemeToggle />
-            <InputSeach />
+          <div className="hidden lg:flex flex-row gap-2 items-center justify-end">
+            <InputSearch />
           </div>
         </div>
       </header>
@@ -67,4 +64,4 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
 
 Header.displayName = 'Header';
 
-export { Header, headerVariants };
+export { Header };

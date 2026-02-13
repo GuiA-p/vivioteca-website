@@ -2,7 +2,6 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 
 import { Logo } from '@/components/atomos/logo/logo';
-import { NavLinks } from '@/components/moleculas/navLinks/navLinks';
 import { SocialLinks } from '@/components/moleculas/socialLinks/socialLinks';
 import { cn } from '@/utils/cn';
 
@@ -61,16 +60,6 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">Links Rápidos</h3>
-              <NavLinks
-                variant="vertical"
-                links={[
-                  { href: '/', label: 'Home', variant: 'footer' },
-                  { href: '/contact', label: 'Contato', variant: 'footer' },
-                  { href: '/about', label: 'Sobre', variant: 'footer' },
-                  { href: '/privacy', label: 'Privacidade', variant: 'footer' },
-                  { href: '/terms', label: 'Termos', variant: 'footer' },
-                ]}
-              />
             </div>
 
             <div>
@@ -93,4 +82,4 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
 
 Footer.displayName = 'Footer';
 
-export { Footer, footerVariants };
+export { Footer };

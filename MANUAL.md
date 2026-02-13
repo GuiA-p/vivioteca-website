@@ -94,7 +94,7 @@ Button.displayName = 'Button'
 
 ## 5. Nomeação (Naming Convention)
 
-- **Arquivos**: `kebab-case.tsx` (Ex: `main-footer.tsx`).
+- **Arquivos**: `camelCase` (Ex: `mainPage.tsx`).
 - **Componentes (React)**: `PascalCase` (Ex: `MainFooter`).
 - **Constantes**: `SCREAMING_SNAKE_CASE` (Ex: `MAX_RETRIES`).
 - **Stories**: `nome.stories.tsx`.

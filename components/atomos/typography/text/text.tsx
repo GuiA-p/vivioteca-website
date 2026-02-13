@@ -51,4 +51,4 @@ const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
 
 Text.displayName = 'Text';
 
-export { Text, textVariants };
+export { Text };

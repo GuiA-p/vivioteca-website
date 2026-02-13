@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Text } from './text'; // Ajuste o caminho conforme seu projeto
+import { Text } from './text';
 
 const meta: Meta<typeof Text> = {
   title: 'Atomos/Text',

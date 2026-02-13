@@ -2,7 +2,7 @@ import { Button } from '@/components/atomos/button/button';
 import { Input } from '@/components/atomos/input/input';
 import { Label } from '@/components/atomos/label/label';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   return (
     <form action="" className="flex flex-col gap-4">
       <div>
@@ -17,3 +17,5 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+export { LoginForm };

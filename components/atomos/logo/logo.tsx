@@ -59,7 +59,6 @@ const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
     },
     ref,
   ) => {
-    // Configurações padrão baseadas no tamanho
     const getSize = (size: LogoProps['size']) => {
       switch (size) {
         case 'sm':
@@ -98,7 +97,6 @@ const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
       <Link
         href={href}
         ref={ref}
-        className="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded"
         aria-label={`${alt} - Ir para página inicial`}
         {...props}
       >
@@ -110,4 +108,4 @@ const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
 
 Logo.displayName = 'Logo';
 
-export { Logo, logoVariants };
+export { Logo };

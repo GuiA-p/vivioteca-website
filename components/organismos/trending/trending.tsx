@@ -1,5 +1,8 @@
+import { Link } from '@/components/atomos/link/link';
 import { Heading } from '@/components/atomos/typography/heading/heading';
-import { BookCard } from '@/components/moleculas/Cards/trendingCard/bookCard';
+import { Text } from '@/components/atomos/typography/text/text';
+import { SectionLayout } from '@/components/layouts/sectionLayout/sectionLayout';
+import { BookCard } from '@/components/moleculas/bookCard/bookCard';
 import capaExemplo from '@/public/logo/capaLivroEx.png';
 
 const livros = [
@@ -7,13 +10,7 @@ const livros = [
     cover: capaExemplo,
     title: 'Nome Livro',
     description: 'Descrição curta do livro exemplo.',
-    href: '/',
-  },
-  {
-    cover: capaExemplo,
-    title: 'Nome Livro',
-    description: 'Descrição curta do livro exemplo.',
-    href: '/',
+    href: '@/public/logo/capaLivroEx.png',
   },
   {
     cover: capaExemplo,
@@ -31,16 +28,29 @@ const livros = [
 
 export default function Trending() {
   return (
-    <section className="space-y-6">
-      <Heading level="h2" align="center">
-        Trending
+    <SectionLayout background="primary">
+      <Heading level="h2" align="center" className="text-primary-foreground">
+        Melhores da Semana
       </Heading>
 
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex flex-row gap-4 items-center justify-center">
         {livros.map((livro, index) => (
-          <BookCard key={index} {...livro} />
+          <BookCard key={index}>
+            <BookCard.Image src={livro.cover} alt={livro.title} />
+            <BookCard.Header>
+              <Heading level="h5">{livro.title}</Heading>
+            </BookCard.Header>
+
+            <BookCard.Content>
+              <Text>{livro.description}</Text>
+            </BookCard.Content>
+
+            <BookCard.Footer>
+              <Link href={livro.href}>Ler mais</Link>
+            </BookCard.Footer>
+          </BookCard>
         ))}
       </div>
-    </section>
+    </SectionLayout>
   );
 }

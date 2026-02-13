@@ -11,14 +11,12 @@ const linkVariants = cva(
     variants: {
       variant: {
         internal: 'text-primary hover:opacity-80',
-
+        subgect:
+          'bg-foreground text-primary-foreground px-2 py-1 hover:bg-primary-foreground hover:text-foreground ',
         navbar: 'text-foreground/80 hover:text-primary',
-
         footer: 'text-sm text-muted-foreground hover:text-primary',
-
         aside:
           'text-muted-foreground hover:text-foreground hover:bg-muted/30 px-2 py-1 -ml-2 rounded-md',
-
         external:
           'text-primary underline decoration-primary/30 hover:decoration-primary',
       },
@@ -74,7 +72,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
 
     if (isExternal) {
       return (
-        <a
+        <NextLink
           href={href}
           target="_blank"
           rel="noopener noreferrer"
@@ -84,7 +82,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
           {externalIcon && (
             <FiExternalLink className="text-[0.8em] opacity-70" />
           )}
-        </a>
+        </NextLink>
       );
     }
 
@@ -98,4 +96,4 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
 
 Link.displayName = 'Link';
 
-export { Link, linkVariants };
+export { Link };

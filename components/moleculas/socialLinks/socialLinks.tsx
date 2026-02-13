@@ -1,6 +1,6 @@
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
-const socialLinks = [
+const SOCIAL_LINKS = [
   {
     name: 'GitHub',
     href: 'https://github.com/seu-user',
@@ -21,14 +21,14 @@ const socialLinks = [
 export function SocialLinks() {
   return (
     <div className="flex gap-4">
-      {socialLinks.map(({ name, href, icon: Icon }) => (
+      {SOCIAL_LINKS.map(({ name, href, icon: Icon }) => (
         <a
           key={name}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={name}
-          className="rounded-md p-2 text-foreground transition hover:text-muted"
+          className="rounded-md p-2 text-foreground transition hover:text-primary"
         >
           <Icon size={28} />
         </a>

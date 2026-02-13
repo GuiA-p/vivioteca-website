@@ -12,11 +12,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['internal', 'external', 'navbar', 'footer', 'aside'],
-    },
-    theme: {
-      control: { type: 'select' },
-      options: ['default', 'dark'],
+      options: ['internal', 'subgect', 'external', 'navbar', 'footer', 'aside'],
     },
     underline: {
       control: 'boolean',
@@ -40,6 +36,15 @@ export const Internal: Story = {
     variant: 'internal',
   },
 };
+
+export const Subgect: Story = {
+  args: {
+    children: 'Category',
+    href: '/',
+    variant: 'subgect',
+  },
+};
+
 export const External: Story = {
   args: {
     children: 'Link Externo com Ícone',
@@ -62,6 +67,5 @@ export const FooterLink: Story = {
     children: 'Privacidade',
     href: '/privacy',
     variant: 'footer',
-    theme: 'dark',
   },
 };

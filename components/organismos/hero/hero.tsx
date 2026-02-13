@@ -1,13 +1,17 @@
 import Image from 'next/image';
 
-import HeroImagem from '@/assets/iconAbstract.png';
+import HeroImagem from '@/assets/element.svg';
 import { Button } from '@/components/atomos/button/button';
 import { Heading } from '@/components/atomos/typography/heading/heading';
 import { Text } from '@/components/atomos/typography/text/text';
+import { SectionLayout } from '@/components/layouts/sectionLayout/sectionLayout';
 
 export default function Hero() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 items-center justify-between">
+    <SectionLayout
+      padding="lg"
+      className="grid grid-cols-1 md:grid-cols-2 items-center"
+    >
       <div className="flex flex-col gap-2">
         <Heading level="h1">Ache um livro para ler</Heading>
         <Heading level="h4" color="muted">
@@ -25,6 +29,6 @@ export default function Hero() {
       <div className="flex flex-col items-center justify-center">
         <Image src={HeroImagem} alt="" />
       </div>
-    </section>
+    </SectionLayout>
   );
 }

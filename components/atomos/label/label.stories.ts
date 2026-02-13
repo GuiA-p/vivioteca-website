@@ -11,7 +11,7 @@ const meta: Meta<typeof Label> = {
   },
   argTypes: {
     variant: {
-      control: { type: 'select' },
+      control: { type: 'radio' },
       options: ['default', 'disabled'],
     },
   },

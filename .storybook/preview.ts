@@ -5,6 +5,22 @@ import type { Preview } from '@storybook/nextjs-vite';
 const preview: Preview = {
   parameters: {
     controls: {
+      backgrounds: {
+        values: [
+          {
+            name: 'Background',
+            value: '#F2F2F2',
+          },
+          {
+            name: 'Primary',
+            value: '#BF815E',
+          },
+          {
+            name: 'Dark',
+            value: '#401D10',
+          },
+        ],
+      },
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
