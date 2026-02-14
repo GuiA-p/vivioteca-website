@@ -2,8 +2,9 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import Image from 'next/image';
 import Link from 'next/link';
 import { forwardRef } from 'react';
+
+import LogoSVG from '@/public/logo/logo.svg';
 import { cn } from '@/utils/cn';
-import LogoSVG from '@/public/logo/logo.svg'
 
 const logoVariants = cva('transition-all duration-300', {
   variants: {

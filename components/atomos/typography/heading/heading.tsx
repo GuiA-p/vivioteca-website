@@ -35,10 +35,8 @@ const headingVariants = cva(
 );
 
 interface HeadingProps
-  extends Omit<
-      React.HTMLAttributes<HTMLHeadingElement>,
-      'color'
-    >,
+  extends
+    Omit<React.HTMLAttributes<HTMLHeadingElement>, 'color'>,
     VariantProps<typeof headingVariants> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }

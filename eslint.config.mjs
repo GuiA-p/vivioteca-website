@@ -9,16 +9,13 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettier from 'eslint-plugin-prettier';
 
 export default ts.config(
-  // 1. Ignorar arquivos globalmente (Deve ser o primeiro objeto)
   {
     ignores: ['.next/**', 'node_modules/**', 'storybook-static/**', 'dist/**'],
   },
 
-  // 2. Base recomendada
   js.configs.recommended,
   ...ts.configs.recommended,
 
-  // 3. Bloco Único de Configuração (Resolve o erro de plugin não definido)
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
@@ -39,24 +36,20 @@ export default ts.config(
      
     },
     rules: {
-      // Regras do Next e React
+ 
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
       ...hooksPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
 
-      // TypeScript
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
 
-      // Imports
+
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
 
-    
-
-      // Prettier (Sempre por último para sobrescrever conflitos)
       'prettier/prettier': [
         'error',
         {
@@ -70,6 +63,5 @@ export default ts.config(
     },
   },
 
-  // 4. Storybook (Configuração especializada via plugin oficial)
   ...storybook.configs['flat/recommended'],
 );
