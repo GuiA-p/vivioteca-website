@@ -1,9 +1,11 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
-
 import { Logo } from '@/components/atomos/logo/logo';
-import { InputSearch } from '@/components/moleculas/seachBox/SeachBox';
 import { cn } from '@/utils/cn';
+import { InputSearch } from '@/components/moleculas/seachBox/seachBox';
+import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
+import { Link } from '@/components/atomos/link/link';
+
 
 const headerVariants = cva(
   'sticky top-0 z-50 w-full border-b transition-colors',
@@ -33,8 +35,8 @@ const headerVariants = cva(
 
 interface HeaderProps
   extends
-    React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof headerVariants> {
+  React.HTMLAttributes<HTMLElement>,
+  VariantProps<typeof headerVariants> {
   logoHref?: string;
 }
 
@@ -51,7 +53,13 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             <Logo href={logoHref} variant={variant} size={'lg'} />
           </div>
 
-          <div></div>
+          <NavGroup>
+            <Link href='/'>Home</Link>
+            <Link href='/books'>Livros</Link>
+            <Link href='/about'>Sobre</Link>
+            <Link href='/login'>Login</Link>
+            <Link href='/register'>Register</Link>
+          </NavGroup>
 
           <div className="hidden lg:flex flex-row gap-2 items-center justify-end">
             <InputSearch />

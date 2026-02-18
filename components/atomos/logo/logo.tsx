@@ -2,8 +2,6 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import Image from 'next/image';
 import Link from 'next/link';
 import { forwardRef } from 'react';
-
-import LogoSVG from '@/public/logo/logo.svg';
 import { cn } from '@/utils/cn';
 
 const logoVariants = cva('transition-all duration-300', {
@@ -51,7 +49,7 @@ const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
       size,
       hover,
       href = '/',
-      src = LogoSVG,
+      src = '/logo/logo.svg',
       alt = 'Logo',
       width,
       height,

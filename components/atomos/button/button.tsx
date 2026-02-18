@@ -13,8 +13,10 @@ const buttonVariants = cva(
           'bg-muted text-foreground border border-border hover:bg-muted/80',
         ghost:
           'border-2 border-border bg-transparent hover:bg-muted hover:text-foreground',
+         subgect:
+          'bg-foreground text-primary-foreground px-2 py-1 hover:bg-primary-foreground hover:text-foreground',
         disable:
-          'bg-muted/50 text-muted-foreground shadow-none cursor-not-allowed',
+          'bg-muted/50 text-muted-foreground/50 shadow-none cursor-not-allowed',
       },
       size: {
         sm: 'h-9 px-3 text-sm',

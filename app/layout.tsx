@@ -19,7 +19,7 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata: Metadata = {
-  title: 'Vivioteca - Indicações de livros para ler',
+  title: 'FindBook - Encontre sua proxima leitura',
   description: 'Busque algo para ler e comente oque achou do livro que já leu.',
   icons: {
     icon: '/logo/logoIcon.svg',

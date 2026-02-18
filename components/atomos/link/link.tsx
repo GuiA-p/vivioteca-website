@@ -1,7 +1,10 @@
+'use client';
+
 import { cva, type VariantProps } from 'class-variance-authority';
 import NextLink from 'next/link';
 import * as React from 'react';
 import { FiExternalLink } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/utils/cn';
 
@@ -11,8 +14,6 @@ const linkVariants = cva(
     variants: {
       variant: {
         internal: 'text-primary hover:opacity-80',
-        subgect:
-          'bg-foreground text-primary-foreground px-2 py-1 hover:bg-primary-foreground hover:text-foreground ',
         navbar: 'text-foreground/80 hover:text-primary',
         footer: 'text-sm text-muted-foreground hover:text-primary',
         aside:
@@ -24,11 +25,20 @@ const linkVariants = cva(
         true: 'underline',
         false: 'no-underline',
       },
+      active: {
+        true: 'text-foreground',
+        false: '',
+      },
     },
     compoundVariants: [
       {
         variant: 'external',
         className: 'inline-flex items-center gap-1',
+      },
+      {
+        variant: 'navbar',
+        active: true,
+        className: 'text-primary font-semibold',
       },
     ],
     defaultVariants: {
@@ -39,10 +49,8 @@ const linkVariants = cva(
 );
 
 export interface LinkProps
-  extends
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  extends React.ComponentPropsWithoutRef<typeof NextLink>,
     VariantProps<typeof linkVariants> {
-  href: string;
   externalIcon?: boolean;
 }
 
@@ -59,24 +67,35 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref,
   ) => {
-    const isExternal =
-      href.startsWith('http') ||
-      href.startsWith('//') ||
-      props.target === '_blank';
+    const pathname = usePathname();
 
-    const commonProps = {
-      ref,
-      className: cn(linkVariants({ variant, underline }), className),
-      ...props,
-    };
+    const isExternal =
+      typeof href === 'string' &&
+      (href.startsWith('http') ||
+        href.startsWith('//') ||
+        props.target === '_blank');
+
+    const isActive =
+      typeof href === 'string' && pathname === href;
+
+    const computedClassName = cn(
+      linkVariants({
+        variant,
+        underline,
+        active: isActive,
+      }),
+      className,
+    );
 
     if (isExternal) {
       return (
         <NextLink
+          ref={ref}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          {...commonProps}
+          className={computedClassName}
+          {...props}
         >
           {children}
           {externalIcon && (
@@ -87,7 +106,12 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     }
 
     return (
-      <NextLink href={href} {...commonProps}>
+      <NextLink
+        ref={ref}
+        href={href}
+        className={computedClassName}
+        {...props}
+      >
         {children}
       </NextLink>
     );
