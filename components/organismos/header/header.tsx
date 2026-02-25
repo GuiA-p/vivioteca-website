@@ -2,9 +2,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import { Logo } from '@/components/atomos/logo/logo';
 import { cn } from '@/utils/cn';
-import { InputSearch } from '@/components/moleculas/seachBox/seachBox';
+
 import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
 import { Link } from '@/components/atomos/link/link';
+import { InputSearch } from '@/components/moleculas/seachBox/seachBox';
+
 
 
 const headerVariants = cva(
