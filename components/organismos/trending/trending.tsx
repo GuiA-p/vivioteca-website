@@ -3,30 +3,14 @@ import { Heading } from '@/components/atomos/typography/heading/heading';
 import { Text } from '@/components/atomos/typography/text/text';
 import { SectionLayout } from '@/components/layouts/sectionLayout/sectionLayout';
 import { BookCard } from '@/components/moleculas/bookCard/bookCard';
-import CapaLivro from '@/public/capaLivroEx.png';
+import { getBooksByIds } from '@/services/googleBooks.service';
+import { GoogleBook } from '@/types/google-books';
 
-const LIVROS = [
-  {
-    cover: CapaLivro,
-    title: 'Nome Livro',
-    description: 'Descrição curta do livro exemplo.',
-    href: '#',
-  },
-  {
-    cover: CapaLivro,
-    title: 'Nome Livro',
-    description: 'Descrição curta do livro exemplo.',
-    href: '#',
-  },
-  {
-    cover: CapaLivro,
-    title: 'Nome Livro',
-    description: 'Descrição curta do livro exemplo.',
-    href: '#',
-  },
-];
+const BOOK_IDS = ['zyTCAlFPjgYC', 'uW3XAAAAMAAJ', 'm8dPPgAACAAJ'];
 
-export default function Trending() {
+export default async function Trending() {
+  const books: GoogleBook[] = await getBooksByIds(BOOK_IDS);
+
   return (
     <SectionLayout background="primary">
       <Heading level="h2" align="center" className="text-primary-foreground">
@@ -34,23 +18,34 @@ export default function Trending() {
       </Heading>
 
       <div className="flex flex-row gap-4 items-center justify-center">
-        {LIVROS.map((livro, index) => (
-          <BookCard key={index}>
-            <BookCard.Image src={livro.cover} alt={livro.title} />
+        {books.map((book) => {
+          const { id, volumeInfo } = book;
 
-            <BookCard.Header>
-              <Heading level="h5">{livro.title}</Heading>
-            </BookCard.Header>
+          return (
+            <BookCard key={id}>
+              {volumeInfo.imageLinks?.thumbnail && (
+                <BookCard.Image
+                  src={volumeInfo.imageLinks.thumbnail}
+                  alt={volumeInfo.title}
+                />
+              )}
 
-            <BookCard.Content>
-              <Text>{livro.description}</Text>
-            </BookCard.Content>
+              <BookCard.Header>
+                <Heading level="h5">{volumeInfo.title}</Heading>
+              </BookCard.Header>
 
-            <BookCard.Footer>
-              <Link href={livro.href}>Ler mais</Link>
-            </BookCard.Footer>
-          </BookCard>
-        ))}
+              <BookCard.Content>
+                <Text>
+                  {volumeInfo.authors?.join(', ') ?? 'Autor desconhecido'}
+                </Text>
+              </BookCard.Content>
+
+              <BookCard.Footer>
+                <Link href={`/books/${id}`}>Ler mais</Link>
+              </BookCard.Footer>
+            </BookCard>
+          );
+        })}
       </div>
     </SectionLayout>
   );

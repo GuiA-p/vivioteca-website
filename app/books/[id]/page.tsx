@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 type PageProps = {
   params: Promise<{
@@ -8,10 +8,9 @@ type PageProps = {
 };
 
 async function getBookById(id: string) {
-  const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes/${id}`,
-    { cache: "no-store" }
-  );
+  const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`, {
+    cache: 'no-store',
+  });
 
   if (!res.ok) return null;
 
@@ -42,7 +41,6 @@ export default async function BookPage({ params }: PageProps) {
   return (
     <main className="container mx-auto p-6">
       <div className="grid md:grid-cols-2 gap-10">
-        
         {/* 📚 Capa */}
         <div className="relative w-full aspect-[3/4] max-w-sm">
           {info.imageLinks?.thumbnail ? (
@@ -59,12 +57,10 @@ export default async function BookPage({ params }: PageProps) {
 
         {/* 📖 Informações */}
         <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold">
-            {info.title}
-          </h1>
+          <h1 className="text-3xl font-bold">{info.title}</h1>
 
           <p className="text-lg text-gray-500">
-            {info.authors?.join(", ") || "Autor desconhecido"}
+            {info.authors?.join(', ') || 'Autor desconhecido'}
           </p>
 
           {info.publisher && (
@@ -87,9 +83,7 @@ export default async function BookPage({ params }: PageProps) {
 
           {info.description && (
             <div className="mt-4">
-              <h2 className="text-xl font-semibold mb-2">
-                Descrição
-              </h2>
+              <h2 className="text-xl font-semibold mb-2">Descrição</h2>
               <div
                 className="text-sm leading-relaxed"
                 dangerouslySetInnerHTML={{

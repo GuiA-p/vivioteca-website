@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
+
 import { cn } from '@/utils/cn';
 
 const buttonVariants = cva(
@@ -13,7 +14,9 @@ const buttonVariants = cva(
           'bg-muted text-foreground border border-border hover:bg-muted/80',
         ghost:
           'border-2 border-border bg-transparent hover:bg-muted hover:text-foreground',
-         subgect:
+        subgect:
+          'bg-foreground text-primary-foreground px-2 py-1 hover:bg-primary-foreground hover:text-foreground',
+        social:
           'bg-foreground text-primary-foreground px-2 py-1 hover:bg-primary-foreground hover:text-foreground',
         disable:
           'bg-muted/50 text-muted-foreground/50 shadow-none cursor-not-allowed',
@@ -22,6 +25,7 @@ const buttonVariants = cva(
         sm: 'h-9 px-3 text-sm',
         md: 'h-10 px-4 py-2',
         lg: 'h-11 px-8 text-lg',
+        full: 'w-full h-11 px-8',
       },
     },
     defaultVariants: {

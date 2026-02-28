@@ -2,9 +2,9 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import { FiExternalLink } from 'react-icons/fi';
-import { usePathname } from 'next/navigation';
 
 import { cn } from '@/utils/cn';
 
@@ -49,7 +49,8 @@ const linkVariants = cva(
 );
 
 export interface LinkProps
-  extends React.ComponentPropsWithoutRef<typeof NextLink>,
+  extends
+    React.ComponentPropsWithoutRef<typeof NextLink>,
     VariantProps<typeof linkVariants> {
   externalIcon?: boolean;
 }
@@ -75,8 +76,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         href.startsWith('//') ||
         props.target === '_blank');
 
-    const isActive =
-      typeof href === 'string' && pathname === href;
+    const isActive = typeof href === 'string' && pathname === href;
 
     const computedClassName = cn(
       linkVariants({
@@ -106,12 +106,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     }
 
     return (
-      <NextLink
-        ref={ref}
-        href={href}
-        className={computedClassName}
-        {...props}
-      >
+      <NextLink ref={ref} href={href} className={computedClassName} {...props}>
         {children}
       </NextLink>
     );

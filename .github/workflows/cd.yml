@@ -1,0 +1,6 @@
+name: "CD (Entrega/Deploy Continua): Main Workflows"
+
+on:
+  push:
+    branches: 
+      -main

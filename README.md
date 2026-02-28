@@ -33,7 +33,7 @@ npm run dev
 
 A aplicação estará disponível em:
 - **Aplicação:**   : 'Ainda não disponível para visualização :/
-- **Storybook:**   : 'Ainda não disponível para visualização :/
+- **Storybook:**   : https://storybook-static-eosin.vercel.app/
 
 ---
 

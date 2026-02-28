@@ -12,7 +12,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['internal', 'subgect', 'external', 'navbar', 'footer', 'aside'],
+      options: ['internal', 'external', 'navbar', 'footer', 'aside'],
     },
     underline: {
       control: 'boolean',
@@ -34,14 +34,6 @@ export const Internal: Story = {
     children: 'Link Interno',
     href: '/',
     variant: 'internal',
-  },
-};
-
-export const Subgect: Story = {
-  args: {
-    children: 'Category',
-    href: '/',
-    variant: 'subgect',
   },
 };
 

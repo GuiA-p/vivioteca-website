@@ -12,9 +12,9 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'radio',
-      options: ['primary', 'secundary', 'ghost', 'disable'],
+      options: ['primary', 'secundary', 'ghost', 'social', 'disable'],
     },
-    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
+    size: { control: 'radio', options: ['sm', 'md', 'lg', 'full'] },
   },
 };
 
@@ -39,6 +39,13 @@ export const Ghost: Story = {
   args: {
     children: 'Ghost Button',
     variant: 'ghost',
+  },
+};
+
+export const Social: Story = {
+  args: {
+    children: 'Social Button',
+    variant: 'social',
   },
 };
 

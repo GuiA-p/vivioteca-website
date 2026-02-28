@@ -1,12 +1,11 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 
+import { Link } from '@/components/atomos/link/link';
 import { Logo } from '@/components/atomos/logo/logo';
+import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
 import { SocialLinks } from '@/components/moleculas/socialLinks/socialLinks';
 import { cn } from '@/utils/cn';
-import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
-import { Link } from '@/components/atomos/link/link';
-
 
 const footerVariants = cva('w-full border-t', {
   variants: {
@@ -28,8 +27,8 @@ const footerVariants = cva('w-full border-t', {
 
 export interface FooterProps
   extends
-  React.HTMLAttributes<HTMLElement>,
-  VariantProps<typeof footerVariants> {
+    React.HTMLAttributes<HTMLElement>,
+    VariantProps<typeof footerVariants> {
   copyright?: string;
 }
 
@@ -63,16 +62,23 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">Links Rápidos</h3>
-              <NavGroup variant='vertical'>
-                <Link variant='footer' href='/politica-de-privacidade' >Política de Privacidade</Link>
-                <Link variant='footer' href='/termos-de-uso'> Termos de uso</Link>
+              <NavGroup variant="vertical">
+                <Link variant="footer" href="/politica-de-privacidade">
+                  Política de Privacidade
+                </Link>
+                <Link variant="footer" href="/termos-de-uso">
+                  {' '}
+                  Termos de uso
+                </Link>
               </NavGroup>
             </div>
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">Contato</h3>
               <div className="space-y-2">
-                <p className="flex items-center">profissionalguilherme5@gmail.com</p>
+                <p className="flex items-center">
+                  profissionalguilherme5@gmail.com
+                </p>
                 <p className="flex items-center">(31) 99216-6724</p>
               </div>
             </div>

@@ -1,13 +1,11 @@
-name: "CI (Integração Continua) : Primeira Action"
+name: "CI (Integração Continua): Main Workflows"
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: 
       -main
 
 jobs:
-  # Build job
     exemplo:
        runs-on: ubuntu-latest
        steps:
