@@ -30,7 +30,6 @@ const textVariants = cva('font-serif transition-colors', {
   },
 });
 
-// 1. Tipagem polimórfica (sem Any)
 type TextProps<T extends React.ElementType> = VariantProps<
   typeof textVariants
 > & {
@@ -40,12 +39,18 @@ type TextProps<T extends React.ElementType> = VariantProps<
     keyof VariantProps<typeof textVariants> | 'as'
   >;
 
-// 2. Componente interno
-const TextInner = <T extends React.ElementType = 'p'>(
-  { className, size, weight, variant, as, ...props }: TextProps<T>,
-  ref: React.ComponentPropsWithRef<T>['ref'],
+const TextInner = (
+  {
+    className,
+    size,
+    weight,
+    variant,
+    as,
+    ...props
+  }: TextProps<React.ElementType>,
+  ref: React.ForwardedRef<HTMLElement>,
 ) => {
-  const Component = as || ('p' as React.ElementType);
+  const Component = as || 'p';
 
   return (
     <Component
@@ -56,13 +61,15 @@ const TextInner = <T extends React.ElementType = 'p'>(
   );
 };
 
-// 3. Exportação com tipagem manual para evitar o "any" no displayName
-type TextComponent = <T extends React.ElementType = 'p'>(
-  props: TextProps<T> & { ref?: React.ComponentPropsWithRef<T>['ref'] },
-) => React.ReactNode;
-
-export const Text = React.forwardRef(TextInner) as unknown as TextComponent & {
+interface TextComponent {
+  <T extends React.ElementType = 'p'>(
+    props: TextProps<T> & { ref?: React.ComponentPropsWithRef<T>['ref'] },
+  ): React.ReactNode;
   displayName?: string;
-};
+}
+
+export const Text = React.forwardRef(TextInner) as unknown as TextComponent;
 
 Text.displayName = 'Text';
+
+export { textVariants };
