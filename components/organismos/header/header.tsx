@@ -3,8 +3,8 @@ import { forwardRef } from 'react';
 
 import { Link } from '@/components/atomos/link/link';
 import { Logo } from '@/components/atomos/logo/logo';
-import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
 import { InputSearch } from '@/components/moleculas/InputSearch/InputSearch';
+import { NavGroup } from '@/components/moleculas/navGroup/navGroup';
 import { cn } from '@/utils/cn';
 
 const headerVariants = cva(

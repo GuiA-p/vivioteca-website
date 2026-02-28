@@ -4,6 +4,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
 import storybook from 'eslint-plugin-storybook';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettier from 'eslint-plugin-prettier';
@@ -22,9 +23,10 @@ export default ts.config(
       '@next/next': nextPlugin,
       'react': reactPlugin,
       'react-hooks': hooksPlugin,
-  
+
       'simple-import-sort': simpleImportSort,
       'prettier': prettier,
+      'unused-imports': unusedImports,
     },
     languageOptions: {
       parserOptions: {
@@ -33,17 +35,26 @@ export default ts.config(
     },
     settings: {
       react: { version: 'detect' },
-     
+
     },
     rules: {
- 
+
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs['core-web-vitals'].rules,
       ...hooksPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
 
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
 
 

@@ -2,7 +2,6 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import Image, { StaticImageData } from 'next/image';
 import * as React from 'react';
 
-import { Link } from '@/components/atomos/link/link';
 import { cn } from '@/utils/cn';
 
 const bookCardVariants = cva(

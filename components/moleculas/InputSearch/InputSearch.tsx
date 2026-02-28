@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 import { Button } from '@/components/atomos/button/button';
@@ -12,10 +12,6 @@ const InputSearchContent = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get('q');
   const [text, setText] = useState(query || '');
-
-  useEffect(() => {
-    setText(query || '');
-  }, [query]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +42,11 @@ const InputSearchContent = () => {
 
 const InputSearch = () => {
   return (
-    <Suspense fallback={<div className="h-10 w-full animate-pulse bg-gray-200 rounded" />}>
+    <Suspense
+      fallback={
+        <div className="h-10 w-full animate-pulse bg-gray-200 rounded" />
+      }
+    >
       <InputSearchContent />
     </Suspense>
   );

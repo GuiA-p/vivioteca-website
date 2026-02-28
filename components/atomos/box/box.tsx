@@ -22,7 +22,15 @@ interface BoxProsp
 
 const Box = React.forwardRef<HTMLDivElement, BoxProsp>(
   ({ children, className, variant, ...props }, ref) => {
-    return <div className={cn(boxVariants({ variant }), ref)}>{children}</div>;
+    return (
+      <div
+        ref={ref}
+        className={cn(boxVariants({ variant }), className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
   },
 );
 

@@ -24,7 +24,11 @@ export interface InputBoxProps
 const InputBox = React.forwardRef<HTMLDivElement, InputBoxProps>(
   ({ className, children, variant, ...props }, ref) => {
     return (
-      <div ref={ref} className={cn(inputBoxVariants({ variant }))} {...props}>
+      <div
+        ref={ref}
+        className={cn(inputBoxVariants({ variant }), className)}
+        {...props}
+      >
         {children}
       </div>
     );
