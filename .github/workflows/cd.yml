@@ -3,6 +3,9 @@ name: "CD - Production Deploy"
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 
 env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

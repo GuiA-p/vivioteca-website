@@ -3,7 +3,9 @@ name: "CD - Docker Hub"
 on:
   push:
     branches: [main]
-
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
 jobs:
   docker:
     name: 🐳 Build and Push
