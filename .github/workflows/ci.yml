@@ -1,15 +1,82 @@
-name: "CI (Integração Continua): Main Workflows"
+name: "CI - Quality Pipeline"
 
 on:
-  push:
-    branches: 
-      -main
+  pull_request:
+    branches: [main]
 
 jobs:
-    exemplo:
-       runs-on: ubuntu-latest
-       steps:
-        - uses: actions/checkout@v4
-          
-        - name: Run a one-line script    
-          run: echo Hello, world!
+  quality:
+    name: 🔍 Lint + Typecheck + Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Generate Prisma
+        run: npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Unit Tests
+        run: npx vitest run --coverage
+
+  build:
+    name: 🏗️ Build App
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npm run build
+
+  storybook:
+    name: 📚 Build Storybook
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+      - run: npm run build-storybook
+
+  e2e:
+    name: 🌐 E2E Playwright
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npx prisma generate
+      - run: npm run build
+      - run: npm start &
+      - run: npx playwright test
