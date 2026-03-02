@@ -1,23 +1,14 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+import { getBookById } from '@/services/googleBooks.service';
+
 type PageProps = {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 };
 
-async function getBookById(id: string) {
-  const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`, {
-    cache: 'no-store',
-  });
-
-  if (!res.ok) return null;
-
-  return res.json();
-}
-
-// 🔥 SEO dinâmico
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
   const book = await getBookById(id);
@@ -41,7 +32,6 @@ export default async function BookPage({ params }: PageProps) {
   return (
     <main className="container mx-auto p-6">
       <div className="grid md:grid-cols-2 gap-10">
-        {/* 📚 Capa */}
         <div className="relative w-full aspect-[3/4] max-w-sm">
           {info.imageLinks?.thumbnail ? (
             <Image
@@ -55,7 +45,6 @@ export default async function BookPage({ params }: PageProps) {
           )}
         </div>
 
-        {/* 📖 Informações */}
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold">{info.title}</h1>
 

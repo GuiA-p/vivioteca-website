@@ -3,14 +3,19 @@ import { Heading } from '@/components/atomos/typography/heading/heading';
 import { Text } from '@/components/atomos/typography/text/text';
 import { SectionLayout } from '@/components/layouts/sectionLayout/sectionLayout';
 import { BookCard } from '@/components/moleculas/bookCard/bookCard';
-import { getBooksByIds } from '@/services/googleBooks.service';
+
+import { getBookById } from '@/services/googleBooks.service';
 import { GoogleBook } from '@/types/google-books';
 
 const BOOK_IDS = ['zyTCAlFPjgYC', 'uW3XAAAAMAAJ', 'm8dPPgAACAAJ'];
 
-export default async function Trending() {
-  const books: GoogleBook[] = await getBooksByIds(BOOK_IDS);
+export async function getBooksByIds(ids: string[]): Promise<(GoogleBook | null)[]> {
+  return Promise.all(ids.map(id => getBookById(id)));
+}
 
+export default async function Trending() {
+  const response = await getBooksByIds(BOOK_IDS);
+  const books = response.filter((book): book is GoogleBook => book !== null);
   return (
     <SectionLayout background="primary">
       <Heading level="h2" align="center" className="text-primary-foreground">

@@ -6,15 +6,12 @@ import { searchBooks } from '@/services/googleBooks.service';
 import { GoogleBook } from '@/types/google-books';
 
 interface BooksPageProps {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: { q?: string };
 }
 
 export default async function BooksPage({ searchParams }: BooksPageProps) {
-  // --- CORREÇÃO AQUI ---
-  // Primeiro resolvemos a Promise, depois pegamos o 'q'
   const resolvedParams = await searchParams;
   const query = resolvedParams.q ?? 'javascript';
-  // ---------------------
 
   const books: GoogleBook[] = await searchBooks(query);
 
@@ -22,7 +19,6 @@ export default async function BooksPage({ searchParams }: BooksPageProps) {
     <main className="container mx-auto p-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {books?.map((book) => {
-          // Adicionado um '?' por segurança caso searchBooks falhe
           const { id, volumeInfo } = book;
           const { title, authors, imageLinks } = volumeInfo;
 

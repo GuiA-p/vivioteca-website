@@ -1,39 +1,52 @@
 import { GoogleBook, GoogleBooksResponse } from '@/types/google-books';
 
 const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
+const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
-async function handleResponse<T>(res: Response): Promise<T> {
-  if (!res.ok) {
-    throw new Error(`Erro API: ${res.status}`);
+if (!API_KEY) {
+  throw new Error('GOOGLE_BOOKS_API_KEY não definida no .env');
+}
+
+async function safeFetch<T>(
+  url: string,
+  revalidate: number,
+  retries = 2,
+): Promise<T | null> {
+  try {
+    const res = await fetch(url, {
+      next: { revalidate },
+    });
+
+    if (res.status === 429 && retries > 0) {
+      console.warn('Rate limit atingido. Tentando novamente...');
+      await new Promise((r) => setTimeout(r, 1000));
+      return safeFetch<T>(url, revalidate, retries - 1);
+    }
+
+    if (!res.ok) {
+      console.error('Google API error:', res.status);
+      return null;
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Network error:', error);
+    return null;
   }
-
-  return res.json();
 }
 
 export async function searchBooks(query: string): Promise<GoogleBook[]> {
-  const res = await fetch(`${BASE_URL}?q=${encodeURIComponent(query)}`, {
-    next: { revalidate: 60 }, // ISR 1 min
-  });
+  if (!query.trim()) return [];
 
-  const data = await handleResponse<GoogleBooksResponse>(res);
+  const url = `${BASE_URL}?q=${encodeURIComponent(query)}&key=${API_KEY}`;
 
-  return data.items ?? [];
+  const data = await safeFetch<GoogleBooksResponse>(url, 300);
+
+  return data?.items ?? [];
 }
 
-export async function getBookById(id: string): Promise<GoogleBook> {
-  const res = await fetch(`${BASE_URL}/${id}`, {
-    next: { revalidate: 300 }, // cache 5 min
-  });
+export async function getBookById(id: string): Promise<GoogleBook | null> {
+  const url = `${BASE_URL}/${id}?key=${API_KEY}`;
 
-  return handleResponse<GoogleBook>(res);
-}
-
-export async function getBooksByIds(ids: string[]): Promise<GoogleBook[]> {
-  const requests = ids.map((id) =>
-    fetch(`${BASE_URL}/${id}`, {
-      next: { revalidate: 3600 }, // cache 1h
-    }).then((res) => handleResponse<GoogleBook>(res)),
-  );
-
-  return Promise.all(requests);
+  return safeFetch<GoogleBook>(url, 600);
 }
