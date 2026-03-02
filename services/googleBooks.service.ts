@@ -4,7 +4,9 @@ const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
 const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
 if (!API_KEY) {
-  throw new Error('GOOGLE_BOOKS_API_KEY não definida no .env');
+  console.warn(
+    '⚠️ Warning: GOOGLE_BOOKS_API_KEY is missing. API calls will fail.',
+  );
 }
 
 async function safeFetch<T>(
